@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Measures Grid</h1>
+
+  <p>Welcome to <em>Measures Grid</em>, a very basic Django website where we have obtained data from a CSV file,
+  saved it into DB and represented them in a table in the present view</p>
+
+<h2>Measures information</h2>
+
+  <p>The application has the following information about electric measures:</p>
+  <ul>
+    <li><strong>Measures amount:</strong> {{ num_measures }}</li>
+
+    {% if num_measures > 0 %}
+
+    <li><strong>Measures:</strong></li>
+
+    <ul>
+        <table class="table table-bordered table-striped table-hover table-sm table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Energy (kWh)</th>
+                <th scope="col">Reactive Energy (kVArh)</th>
+                <th scope="col">Power (kW)</th>
+                <th scope="col">Maximeter (kW)</th>
+                <th scope="col">Reactive Power (kVAr)</th>
+                <th scope="col">Voltage (V)</th>
+                <th scope="col">Intensity (A)</th>
+                <th scope="col">Power Factor (φ)</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for m in measures %}
+                <tr>
+                <th scope="row">{{m.id}}</th>
+                <td>{{m.timestamp}}</td>
+                <td>{{m.energy}}</td>
+                <td>{{m.reactiveEnergy}}</td>
+                <td>{{m.power}}</td>
+                <td>{{m.maximeter}}</td>
+                <td>{{m.reactivePower}}</td>
+                <td>{{m.voltage}}</td>
+                <td>{{m.intensity}}</td>
+                <td>{{m.powerFactor}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+    </ul>
+    {% else %}
+      <p>There are no measures available.</p>
+
+    {% endif %}  
+
+  </ul>
+
+{% endblock %}
